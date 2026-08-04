@@ -6,12 +6,23 @@
 // output::
 // // undefined
 
-function greet(name) {
-  console.log("hello" + name);
-}
+// function greet(name) {
+//   console.log("hello" + name);
+// }
 
-function processUser(callback) {
-  callback("nikhil");
-}
+// function processUser(callback) {
+//   callback("nikhil");
+// }
 
-processUser(greet);
+// processUser(greet);
+
+const person = {
+  name: "nikhil",
+  age: 22,
+  greet: function () {
+    console.log("hello");
+  },
+};
+
+console.log(person.greet());
+// person.greet();
