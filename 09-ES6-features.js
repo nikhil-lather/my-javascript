@@ -1,3 +1,13 @@
+9. ES6+ Features (Must Know)
+Destructuring
+Spread Operator (...)
+Rest Operator
+Default Parameters
+Template Literals
+Enhanced Object Literals
+Optional Chaining
+Nullish Coalescing
+
 1. Destructuring ⭐⭐⭐⭐⭐
 
 Already covered in Arrays and Objects.
