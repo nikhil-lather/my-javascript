@@ -1,4 +1,13 @@
 17. Advanced JavaScript ⭐⭐⭐⭐⭐
+Debouncing
+Throttling
+Memoization
+Currying
+Pure Functions
+Higher-Order Functions
+Generators (basic)
+Iterators (basic)
+
 1. Debouncing
 Interview Definition
 
@@ -180,3 +189,334 @@ Runs at fixed intervals
 Scroll
 Mouse move
 Continuous updates matter
+3. Memoization
+Definition
+
+Memoization stores previously calculated results so repeated calls with the same inputs return instantly.
+
+Instead of recalculating.
+
+Without memoization
+
+5+5
+
+calculate
+
+again
+
+5+5
+
+calculate again
+
+With memoization
+
+5+5
+
+calculate
+
+store
+
+5+5
+
+return stored answer
+Example
+function memoize(fn) {
+
+    const cache = {};
+
+    return function (num) {
+
+        if (cache[num]) {
+            console.log("From cache");
+            return cache[num];
+        }
+
+        console.log("Calculating");
+
+        cache[num] = fn(num);
+
+        return cache[num];
+    };
+
+}
+
+function square(n) {
+    return n * n;
+}
+
+const memoSquare = memoize(square);
+
+console.log(memoSquare(5));
+console.log(memoSquare(5));
+
+Output
+
+Calculating
+25
+
+From cache
+25
+Used in
+React (useMemo)
+Dynamic Programming
+Expensive calculations
+4. Currying
+Definition
+
+Currying transforms a function with multiple arguments into a sequence of functions that each take one argument.
+
+Normal
+
+function add(a, b) {
+    return a + b;
+}
+
+console.log(add(2,3));
+
+Curried
+
+function add(a) {
+
+    return function (b) {
+        return a + b;
+    }
+
+}
+
+console.log(add(2)(3));
+
+Output
+
+5
+
+Another Example
+
+const multiply = a => b => c => a * b * c;
+
+console.log(multiply(2)(3)(4));
+
+Output
+
+24
+
+Why use currying?
+
+Reusable functions
+Partial application
+Functional programming
+5. Pure Functions
+Definition
+
+A pure function:
+
+Returns the same output for the same input.
+Has no side effects.
+
+Pure
+
+function add(a,b){
+    return a+b;
+}
+add(2,3)
+
+Always
+
+5
+
+Impure
+
+let total = 0;
+
+function add(num){
+    total += num;
+}
+
+It changes external data.
+
+Side effect.
+
+Another impure example
+
+let count = 0;
+
+function increment() {
+    count++;
+}
+
+Pure functions are easier to:
+
+Test
+Debug
+Predict
+Reuse
+6. Higher-Order Functions
+Definition
+
+A higher-order function is a function that:
+
+takes another function as an argument, OR
+returns another function.
+
+Example
+
+function greet(name){
+    console.log("Hello", name);
+}
+
+function process(callback){
+    callback("Nikhil");
+}
+
+process(greet);
+
+Output
+
+Hello Nikhil
+
+Returns a function
+
+function outer(){
+
+    return function(){
+
+        console.log("Inside");
+
+    };
+
+}
+
+const fn = outer();
+
+fn();
+
+Built-in HOFs
+
+map()
+
+filter()
+
+reduce()
+
+forEach()
+
+find()
+
+some()
+
+every()
+
+All take callback functions.
+
+Interview Question
+
+Is every callback a higher-order function?
+
+No.
+
+The function that accepts the callback is the higher-order function.
+
+The callback itself is just a function.
+
+7. Generators (Basic)
+Definition
+
+A generator is a special function that can pause and resume execution.
+
+Declared using function*.
+
+Example
+
+function* numbers() {
+
+    yield 1;
+    yield 2;
+    yield 3;
+
+}
+
+const gen = numbers();
+
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+
+Output
+
+{ value: 1, done: false }
+
+{ value: 2, done: false }
+
+{ value: 3, done: false }
+
+{ value: undefined, done: true }
+
+How it works
+
+yield 1
+
+pause
+
+↓
+
+next()
+
+↓
+
+yield 2
+
+pause
+
+↓
+
+next()
+
+↓
+
+yield 3
+
+Used for
+
+Lazy evaluation
+Large data processing
+Custom iterators
+8. Iterators (Basic)
+Definition
+
+An iterator is an object that lets you access elements one by one.
+
+It has a next() method.
+
+Example
+
+const arr = [10,20,30];
+
+const iterator = arr[Symbol.iterator]();
+
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+
+Output
+
+{ value: 10, done: false }
+
+{ value: 20, done: false }
+
+{ value: 30, done: false }
+
+{ value: undefined, done: true }
+
+Every array has an iterator.
+
+for...of
+
+uses
+
+iterator internally.
+Generator vs Iterator
+Generator	Iterator
+Created using function*	Any object with next()
+Uses yield	Uses next()
+Can create iterators	Used to traverse data
