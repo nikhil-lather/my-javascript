@@ -1,3 +1,15 @@
+15. Modules
+Import
+Export
+Default Export
+Named Export
+16. Error Handling
+try
+catch
+finally
+throw
+Custom Errors
+
 15. Modules ⭐⭐⭐⭐
 What is a Module?
 
